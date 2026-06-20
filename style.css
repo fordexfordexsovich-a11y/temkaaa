@@ -1,0 +1,56 @@
+const users = [
+  {
+    name: "Иван Иванов",
+    age: 16,
+  },
+
+  {
+    name: "Анна Петрова",
+    age: 15,
+  },
+
+  {
+    name: "Петр Смирнов",
+    age: 17,
+  },
+
+  {
+    name: "Мария Соколова",
+    age: 16,
+  },
+];
+
+const searchInput = document.getElementById("search");
+
+const usersContainer = document.getElementById("users");
+
+renderUsers(users);
+
+searchInput.addEventListener("input", searchUser);
+
+function searchUser() {
+  const searchText = searchInput.value.toLowerCase();
+
+  const filteredUsers = users.filter(function (user) {
+    return user.name.toLowerCase().includes(searchText);
+  });
+
+  renderUsers(filteredUsers);
+}
+
+function renderUsers(usersArray) {
+  usersContainer.innerHTML = "";
+
+  usersArray.forEach(function (user) {
+    let card = document.createElement("div");
+
+    card.classList.add("user-card");
+
+    card.innerHTML = `
+            <h2>${user.name}</h2>
+            <p>Возраст: ${user.age}</p>
+        `;
+
+    usersContainer.appendChild(card);
+  });
+}
